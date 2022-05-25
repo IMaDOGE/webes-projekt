@@ -1,0 +1,73 @@
+<h3>Add Song</h3> <!-- title, author, album, genre, length -->
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="songsaveform" #savesong (ngSubmit)="saveSong(saveSong)">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control"  formControlName="musicTitle" data-toggle="tooltip"
+                 data-placement="right" title="Enter Song Title" >
+          <div class="alert alert-danger" *ngIf = "(SongTitle.touched) && (SongTitle.invalid)" style="margin-top: 5px;">
+            <span *ngIf="SongTitle.errors.required">Song Title is Required</span>
+            <span *ngIf = "SongTitle.errors.minlength">MinLength Error</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" class="form-control"  formControlName="musicAuthor" data-toggle="tooltip"
+                 data-placement="right" title="Enter Song Author" >
+          <div class="alert alert-danger" *ngIf = "(SongAuthor.touched) && (SongAuthor.invalid)" style="margin-top: 5px;">
+            <span *ngIf="SongAuthor.errors.required">Song Author is Required</span>
+            <span *ngIf = "SongAuthor.errors.minlength">MinLength Error</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="album">Album</label>
+          <input type="text" class="form-control"  formControlName="musicAlbum" data-toggle="tooltip"
+                 data-placement="right" title="Enter Album Name" >
+          <div class="alert alert-danger" *ngIf = "(SongAlbum.touched) && (SongAlbum.invalid)" style="margin-top: 5px;">
+            <span *ngIf="SongAlbum.errors.required">Song Album is Required</span>
+            <span *ngIf = "SongAlbum.errors.minlength">MinLength Error</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <input type="text" class="form-control"  formControlName="musicGenre" data-toggle="tooltip"
+                 data-placement="right" title="Enter Song Genre" >
+          <div class="alert alert-danger" *ngIf = "(SongGenre.touched) && (SongGenre.invalid)" style="margin-top: 5px;">
+            <span *ngIf="SongGenre.errors.required">Song Genre is Required</span>
+            <span *ngIf = "SongGenre.errors.minlength">MinLength Error</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="length">Length</label>
+          <input type="text" class="form-control"  formControlName="musicLength" data-toggle="tooltip"
+                 data-placement="right" title="Enter Song Title" >
+          <div class="alert alert-danger" *ngIf = "(SongLength.touched) && (SongLength.invalid)" style="margin-top: 5px;">
+            <span *ngIf="SongLength.errors.required">Song Title is Required</span>
+            <span *ngIf = "SongLength.errors.minlength">MinLength Error</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div [hidden]="!submitted">
+      <h4>Song Added SuccessFully!</h4>
+      <button (click)="addSongForm()" class='btn btn-primary'>Add Another Song</button>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

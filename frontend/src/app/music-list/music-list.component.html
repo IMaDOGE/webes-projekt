@@ -1,0 +1,101 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 style="text-align: center">Songs</h1><br>
+    <div class="row" [hidden]="!deleteMessage">
+
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <div class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Song Deleted</strong>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+
+  <div class="panel-body" *ngIf="songs">
+    <table class="table table-hover table-sm" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead class="thead-light">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Album</th>
+        <th>Genre</th>
+        <th>Length</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let music of songs">
+        <td>{{music.musicTitle}}</td>
+        <td>{{music.musicAuthor}}</td>
+        <td>{{music.musicAlbum}}</td>
+        <td>{{music.musicGenre}}</td>
+        <td>{{music.musicLength}}</td>
+        <td>
+          <button (click)="deleteSong(music.musicId)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+          <button (click)="updateSong(music.musicId)" class='btn btn-info' data-toggle="modal" data-target="#myModal">Update</button>
+        </td>
+      </tr>
+      </tbody><br>
+    </table>
+  </div>
+</div>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="musicupdateform" #updateSong2 (ngSubmit)="updateSong2(updateSong)">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" style="text-align: center">Update Song</h4>
+
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" *ngFor="let music of songlist " >
+          <div [hidden]="isupdated">
+
+            <input type="hidden" class="form-control" formControlName="music_id" [(ngModel)]="music.musicId">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" formControlName="music_title" [(ngModel)]="music.musicTitle"  >
+            </div>
+
+            <div class="form-group">
+              <label for="author">Author</label>
+              <input type="text" class="form-control"  formControlName="music_author" [(ngModel)]="music.musicAuthor"  >
+            </div>
+
+            <div class="form-group">
+              <label for="album">Album</label>
+              <input type="text" class="form-control"  formControlName="music_album" [(ngModel)]="music.musicAlbum"  >
+            </div>
+
+            <div class="form-group">
+              <label for="genre">Genre</label>
+              <input type="text" class="form-control"  formControlName="music_genre" [(ngModel)]="music.musicGenre"  >
+            </div>
+
+            <div class="form-group">
+              <label for="length">Length</label>
+              <input type="text" class="form-control"  formControlName="music_length" [(ngModel)]="music.musicLength"  >
+            </div>
+
+          <div [hidden]="!isupdated">
+            <h4>Song Detail Updated!</h4>
+          </div>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer" >
+          <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
